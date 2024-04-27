@@ -144,13 +144,15 @@
 
 
 // ###..............The never Type........######
+// While this type is not mostly used but you have to know about it in certain cases there si unreachable code and hard to fiind.
+// Bur if we know that our function runs contionouslty we can anotate it with never so that we can easily find bugs later before running the the code.
 
-function processEvent(): never {
-    while (true) {
-        // Do something
-    }
-}
+// function processEvent(): never {
+//     while (true) {
+//         // Do something
+//     }
+// }
 
-processEvent()
+// processEvent()
 
-console.log('hello')
+// console.log('hello')
