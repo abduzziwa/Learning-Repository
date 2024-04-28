@@ -156,3 +156,280 @@
 // processEvent()
 
 // console.log('hello')
+
+
+// ................####### OBJECT ORIENTED PROGRAMMING #####.............
+
+// it is one of the many programming paradigms like (Procedural , Functional, Object-Oriented, Event Driven. Aspect Driven etc.)
+// In objext Oriented programming objects are the building blocks of our application (Here multiple objects work together to solve a problem.)
+
+// An objects is a unit that contains some (data (state) + operations (behaviour))
+//  For example a person is an oject with data (name , email, etc) also known as properties. And the same person also has operations/behavious like (talk(), dance(), etc) aslo known as methods.
+
+// lets create a class ( a class is basically a blue print of an object)
+//  For example the account obbject can have a class with properties like ( id, owner, balance) and methods like( deposit(), withdraw())
+
+// !! In typescritp we also have Access modifiers eg (Public Private and Protected)
+
+// class Account {
+//     public readonly id: number; //this is readonly and can not be modified from outside 
+//     public owner: string;
+//     private _balance: number;
+//     public nickname?: string // this is optonal
+
+//     constructor(id: number, owner: string, _balance: number){
+//         this.id = id;
+//         this.owner = owner;
+//         this._balance = _balance;
+//     }
+
+//     deposit(amount:number): void {
+//         if (amount <= 0)
+//             throw new Error('Invalid Amount')
+//         this._balance += amount
+//     }
+
+//     getBalance(): number{
+//         return this._balance
+//     }
+// }
+
+// let account = new Account(102,'Peter', 0);
+
+//  the other way of how to write a clean code is by using Parameter Properties 
+
+// class Account1 {
+//     nickname?: string
+
+//     constructor(
+//         public readonly id: number, 
+//         public owner: string, 
+//         private _balance: number){
+       
+//     }
+
+//     deposit(amount:number): void {
+//         if (amount <= 0)
+//             throw new Error('Invalid Amount')
+//         this._balance += amount
+//     }
+
+//     getBalance(): number{
+//         return this._balance
+//     }
+// }
+
+// ###....Getters and setter....### 
+
+// class Account1 {
+//     nickname?: string
+
+//     constructor(
+//         public readonly id: number, 
+//         public owner: string, 
+//         private _balance: number){
+       
+//     }
+
+//     deposit(amount:number): void {
+//         if (amount <= 0)
+//             throw new Error('Invalid Amount')
+//         this._balance += amount
+//     }
+//     // the getter looks like this 
+//     get balance(): number{
+//         return this._balance
+//     }
+//     // the setter looks like this 
+//     set balance(value: number) {
+//         if (value < 0)
+//             throw new Error('Invalid Value');
+//         this._balance = value;
+//     }
+// }
+
+// let account = new Account1(101, 'Abdul', 0)
+
+// account.balance = 30
+// console.log(account.balance)
+
+// Index Signitures
+// Basically this help you in assigning key value pairs in a class dynamically 
+
+// class AssigningTicket {
+//     [seatNumber: string] : string;
+// }
+
+// let seat = new AssigningTicket();
+// seat.A1 = 'Mosh';
+// seat.B30 = 'Abdul';
+
+
+
+///.......###Static Members###.....
+// In a situation where we need a single instance of our variable in memory nomatter how mang objects are created. 
+// Imagine being an Uber company where you want to see active rides on the appication
+
+// class Ride {
+//     private static _activeRides: number = 0;
+
+//     start() {
+//         Ride._activeRides++
+//     }
+
+//     stop() {
+//         Ride._activeRides--
+//     }
+
+//     static get activeRides(): number {
+//         return Ride._activeRides
+//     } 
+// }
+
+// let Ride1 = new Ride
+// Ride1.start()
+
+
+// let Ride2 = new Ride
+// Ride2.start()
+
+// let Ride3 = new Ride
+// Ride3.start()
+// Ride3.stop()
+
+// console.log(Ride.activeRides)
+
+
+// #####......Inheritance.....####
+
+// class Person {
+//     constructor (
+//         private firstName: string, 
+//         public lastName: string
+//     ){
+//     }
+
+//     get fullName(): string{
+//         return this.firstName + ' ' + this.lastName
+//     }
+// }
+
+
+// class Student extends Person {
+//     constructor(
+//         private studentNumber: number, firstName:string , lastName:string
+//     ){
+//         super(firstName, lastName)
+//     }
+
+//     get studentNo():number{
+//         return this.studentNumber
+//     }
+// }
+
+// let student = new Student(1, 'Eddie', 'Maffie')
+
+
+// ####..........Method Overriding...####
+// In tis situation we have inheritade the another object but we want to override the method.
+
+// class Teacher extends Person {
+//     override get fullName(): string{
+//         return 'Professor'+ ' ' + super.fullName
+//     }
+// }
+
+// let prof = new Teacher('John', 'Smith')
+
+// console.log(prof.fullName);
+
+// Polymorphims
+// Techinically pollymophyism means means one for many
+// printPeople([
+//     new Person('John', 'Smith'),
+//     new Teacher('John', 'Peters'),
+//     new Teacher('John', 'Petos'),
+//     new Person('John', 'Waldo')
+// ])
+
+// function printPeople(people: Person[]){
+//     let count: number = 0
+//     people.forEach(person => {
+//         count++
+//         console.log(person.fullName)
+//     });
+//     console.log('There are '+ count + ' ' + 'people')   
+// }
+
+// ...........### Abstract classes ###.........
+// This are classes that are created to be extend there are like still being cooked but not ready
+
+// abstract class Shape {
+//     constructor(protected color: string){}
+
+//     abstract render(): void
+// }
+
+// class Tringle extends Shape {
+//     constructor(
+//         public radius: number,
+//         color: string
+//     ){
+//         super(color)
+//     }
+
+//     override render(): void {
+//         console.log('This is a Triangel')
+//     }
+
+//     get shapeColor() {
+//         return this.color
+//     }
+
+// }
+
+// let tri = new Tringle(2,'red')
+// console.log( tri.shapeColor);
+
+
+//###......Interfaces......###
+// interfacess are technically like abstruct classes but with know logic or algorithms in them kind. They are techinically type aliases 
+// instead of using extends we use implements
+// In TypeScript, interfaces and type aliases can be used interchangeably. Both can be used to describe the shape of an object.
+
+// interface Calender {
+//     name: string,
+//     addEvent(): void,
+//     removeEvent(): void
+// }
+
+// class GoogleCalender implements Calender {
+//     constructor( public name: string){}
+//     addEvent(): void {
+//         throw new Error("Method not implemented.");
+//     }
+//     removeEvent(): void {
+//         throw new Error("Method not implemented.");
+//     }
+   
+// }
+
+// interface Employee {
+//     name: string;
+//     salary:number;
+//     address:{
+//         street: string;
+//         city: string;
+//         zipCode:number;
+//     };
+// }
+
+// let employee: Employee = {
+//     name:'John Smith',
+//     salary:50_000,
+//     address:{
+//         street:'Flinders st',
+//         city:'Melbourne',
+//         zipCode:3144
+//     }
+// };

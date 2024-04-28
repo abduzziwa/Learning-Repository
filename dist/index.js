@@ -1,8 +1,21 @@
 "use strict";
-var _a;
-function getCustomer(id) {
-    return id == 0 ? null : { birthday: new Date() };
+class Shape {
+    constructor(color) {
+        this.color = color;
+    }
 }
-let customer = getCustomer(1);
-console.log((_a = customer === null || customer === void 0 ? void 0 : customer.birthday) === null || _a === void 0 ? void 0 : _a.getFullYear());
+class Tringle extends Shape {
+    constructor(radius, color) {
+        super(color);
+        this.radius = radius;
+    }
+    render() {
+        console.log('This is a Triangel');
+    }
+    get shapeColor() {
+        return this.color;
+    }
+}
+let tri = new Tringle(2, 'red');
+console.log(tri.shapeColor);
 //# sourceMappingURL=index.js.map
