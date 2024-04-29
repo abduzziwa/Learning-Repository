@@ -433,3 +433,177 @@
 //         zipCode:3144
 //     }
 // };
+
+
+// ######## GENERICS ##########
+
+// ####........GENERICS CLASSES / TEMPLATE CLASSES..........###
+// This are clases who variable types are provided during the creation of an instance
+
+// class keyValuePair<K, V> {
+//     constructor(public key: K, public value:V){}
+
+// }
+
+// let keyValue = new keyValuePair('1',2)
+
+
+// .............####..GENERIC Functions..###............
+// Just so you know we can create generic functions too
+
+// function makeArray<T>(values: T){
+//     return [values]
+// }
+
+// let array = makeArray(1)
+
+// // Example 2
+
+// class ArrayUtils {
+//     static makeArray<T>(values: T){
+//         return [values]
+//     }
+// }
+
+// let arrays = ArrayUtils.makeArray(1)
+
+
+
+// ............###..GENERIC INTERFACES..###...............
+// To understand this think of how the fetch function works
+
+// interface Result<T> {
+//     data: T | null,
+//     error: string | null
+// }
+
+// function fetch<T>(url: string): Result<T> {
+//     return { data: null, error: null}
+// }
+
+// interface User {
+//     username: string
+// }
+
+// interface Product {
+//     title: string
+// }
+
+// let api = fetch<Product>('url');
+// api.data?.title
+
+
+
+// .....................###..GENERIC CONSTRAITS..########...............
+// This is limiting what a generic can do. Think of it like a validation
+// interface Person {
+//     name: string
+// }
+
+// class Person {
+//     constructor(public name: string){}
+// }
+
+// class Customer extends Person {
+
+// }
+
+// function echo<T extends Person >(value:T): T{
+//     return value
+// }
+// echo(new Person('wooo'))
+
+
+
+// ........############ EXTENDING GENERIC CLASSES #############..............
+
+// interface Product {
+//     name: string;
+//     price: number
+// }
+
+// class Store<T> {
+//     protected _objects: T[] = [];
+
+//     add(obj: T): void {
+//         this._objects.push(obj);
+//     }
+
+// }
+
+// // Fisrt Scenario of extending this generic
+// // Passing on the generic type parameter
+
+// class CompressableStore<T> extends Store<T> {
+//     compress(){}
+// }
+
+// // Second Scenario
+// // Restricting the generic type parameter
+// class SearchableStore<T extends { name: string}> extends Store<T>{
+//     find(name: string): T | undefined {
+//         return this._objects.find(obj => obj.name === name)
+//     }
+
+//  }
+
+
+// // Last Scenario
+// //  Fix the generic type parameter
+//  class ProductStore extends Store<Product> {
+//     filterByCategory(category: string): Product[] {
+//         return []
+//     }
+//  }
+
+
+// .......########### keyof Operator #########...........
+// Google it to find more its fun to understand it
+// interface Product {
+//     name: string;
+//     price: number
+// }
+
+// class Store<T> {
+//     protected _objects: T[] = [];
+
+//     add(obj: T): void {
+//         this._objects.push(obj);
+//     }
+
+//     find (proprety: keyof T, value: unknown): T | undefined {
+//         return this._objects.find(obj => obj[proprety] === value)
+//     }
+
+// }
+
+// let store = new Store<Product>()
+
+// store.add({name: 'a', price: 1})
+// store.find('name', 'a')
+
+
+// .......########## Type Mapping ########..........
+// Sometimes we need the same properties but may be of type only
+
+interface Product {
+    name: string;
+    price: number;
+}
+
+type readonlyProduct = {
+    // index signature
+    // keyof
+    readonly [K in keyof Product]: Product[K]
+}
+
+// also
+
+type readonly<T> = {
+    // index signature
+    // keyof
+    readonly [K in keyof T]: T[K]
+}
+
+// Posibilities are endliess reaserch on it ( Google: typescript utility Types)
+
