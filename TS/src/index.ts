@@ -586,24 +586,192 @@
 // .......########## Type Mapping ########..........
 // Sometimes we need the same properties but may be of type only
 
-interface Product {
-    name: string;
-    price: number;
-}
+// interface Product {
+//     name: string;
+//     price: number;
+// }
 
-type readonlyProduct = {
-    // index signature
-    // keyof
-    readonly [K in keyof Product]: Product[K]
-}
+// type readonlyProduct = {
+//     // index signature
+//     // keyof
+//     readonly [K in keyof Product]: Product[K]
+// }
 
-// also
+// // also
 
-type readonly<T> = {
-    // index signature
-    // keyof
-    readonly [K in keyof T]: T[K]
-}
+// type readonly<T> = {
+//     // index signature
+//     // keyof
+//     readonly [K in keyof T]: T[K]
+// }
 
 // Posibilities are endliess reaserch on it ( Google: typescript utility Types)
 
+
+
+// ######....DECORATORS...#######
+
+// .............## CLASS decorators ##....................
+
+// function Component(constructor: Function){
+//     console.log("Component decorator called")
+//     constructor.prototype.uniqueID = 1;
+//     constructor.prototype.insertInDOM = () => {
+//         console.log('Inserting in DOM')
+//     }
+// }
+
+// @Component
+// class Test {}
+
+// ...## Parameterized Decorators ##..
+
+// type ComponentOptions = {
+//     selector: string
+// }
+// // this function is called a "Decorator factory"
+// function Component(options: ComponentOptions){
+//     return  (constructor: Function) => {
+//             console.log("Component decorator called")
+//             constructor.prototype.optiona = options;
+//             constructor.prototype.uniqueID = 1;
+//             constructor.prototype.insertInDOM = () => {
+//                 console.log('Inserting in DOM')
+//             }
+//         }
+        
+// }
+
+// @Component({selector: '#my-profile'})
+// class Test {}
+
+
+
+
+// ...## Decorator Composition ##,,
+// We can apply multiple decorators to a class or its members
+
+// function Pipe(constructor: Function) {
+//     console.log('Pipe decorstor called');
+//     constructor.prototype.pipe = true;
+// }
+
+// function Component(constructor: Function){
+//     console.log("Component decorator called")
+//     constructor.prototype.uniqueID = 1;
+//     constructor.prototype.insertInDOM = () => {
+//         console.log('Inserting in DOM')
+//     }
+// }
+
+// @Component
+// @Pipe
+// class Test {}
+
+
+
+// ..## Method Decorators ##..
+
+// function Log(target: any, methodName: string, descriptor: PropertyDescriptor){
+//     let original = descriptor.value as Function;
+//     descriptor.value = function(...args: any) {
+//         console.log('Before');
+//         original.call(this, ...args)
+//         console.log('After');
+
+//     }
+// }
+
+// class Person {
+//     @Log
+//     say(message: string) {
+//         console.log('Person Says ' + message)
+//     }
+// }
+
+// let pers = new Person();
+// pers.say('Hello')
+
+
+// ## Accessor Decorators ## 
+
+// function Capitilize(target:any, methodName: string, descriptor: PropertyDescriptor){
+//     const original = descriptor.get;
+//     descriptor.get = function() {
+//         const result = original!.call(this);  
+//         return (typeof result === 'string') ? result.toUpperCase() : result
+//     }
+
+// }
+
+// class Person {
+//     constructor(public firstName: string, public lastName: string) {}
+
+//     @Capitilize
+//     get fullName(){
+//         return `${this.firstName} ${this.lastName}`;
+//     }
+// }
+
+// let pers = new Person('suda', 'duuh');
+// console.log(pers.fullName)
+
+
+
+// ####...Property Decorators ....##
+
+
+// function MinLength(length: number) {
+//     return(target: any, propertyName: string) => {
+//         let value: string;
+//         const descriptor: PropertyDescriptor = {
+//             get(){ return value; },
+//             set(newValue: string){
+//                 if (newValue.length < length)
+//                     throw new Error(`${propertyName} should be atleast ${length} characters`)
+//                 value = newValue
+//             }
+//         }
+
+//         Object.defineProperty(target,propertyName,descriptor)
+//     }
+// }
+
+// class User {
+
+//     @MinLength(4)
+//     password:string
+
+//     constructor(password: string) {
+//         this.password = password
+//     }
+// }
+
+// let user = new User('123')
+// console.log(user.password)
+
+
+// ###......Parameter Decorators..........####
+
+// type WatchedParameter = {
+//     methodName: string,
+//     parameterIndex: number
+// }
+
+// const watchedParameters: WatchedParameter[] = [];
+
+// function Watch(target:any, methodName: string, parameterIndex: number){
+//     watchedParameters.push({
+//         methodName,
+//         parameterIndex
+//     })
+// }
+// class Vehicle {
+//     move(@Watch speed: number){}
+// }
+
+// console.log(watchedParameters);
+
+
+
+// .................########### MODULES ###########...............
