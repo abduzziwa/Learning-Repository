@@ -775,3 +775,37 @@
 
 
 // .................########### MODULES ###########...............
+// Module is simlply a technical name for a new file 
+// You can change the name of the module using as 
+// export key word to export
+
+// import { Circle } from './shapes'        To import an object.
+
+// let circle = new Circle(1);
+// console.log(circle.radius);
+
+// ####..........module formats...............###
+// this are different ways exports are defined in javascript
+// THe different examples of modules are AMD UM COMMONJS EC2015 / EC2022
+
+
+// ###...........Default Exports..........####
+// sometimes we just want to export a single thing from a module
+
+// And the way you write is : export default
+
+// And when imported we write import modulename from './modulename'
+
+
+// #####............WildCard imports..........###
+// if we think of a scenario where we have to import alot of objects. 
+// INsuch cases we use  :  import * as Shapes from "./shapes"
+// The we can acess them from a bucket we created eg: Shapes.
+
+
+// ######......RE-EXPORTING...#####
+// This simply means exporting a file with imported files it simply makes tyour code cleaner.
+
+//  /shapes/index.tsexport { Circle } from'./circle'; 
+//  export { Square } from'./square'; 
+ // app.tsimport { Circle, Square } from'./shapes'; 
