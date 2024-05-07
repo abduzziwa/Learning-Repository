@@ -875,3 +875,7 @@
 // for example lodash we simply type (npm i -D @types/lodash)
 
 // since typescript is becomming more popular most JS files come with declaration files.
+
+
+// REACT WITH TYPESCRIPT
+// React is a library for building user interfaces. It is a library for building user interfaces.
