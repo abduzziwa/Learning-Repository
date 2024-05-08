@@ -879,3 +879,10 @@
 
 // REACT WITH TYPESCRIPT
 // React is a library for building user interfaces. It is a library for building user interfaces.
+// npx create-react-app reminders-app --template typescript - creating a react app with typescript
+// Look in reminders folder for the code.!!!!
+
+
+
+// ##### NODE AND EXPRESS WITH TYPESCRIPT #####
+// THE CODE IS STORED IN REMINDERS API FOLDER.!!!!
